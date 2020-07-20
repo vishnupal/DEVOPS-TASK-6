@@ -1,0 +1,57 @@
+job("github_pull")
+{
+  scm{
+    
+    github("vishnupal/DEVOPS-TASK-6","master")
+    
+  }
+  
+  triggers{
+        
+       authenticationToken('git_commit')
+    
+        githubPush()
+  
+}
+  
+  steps{
+    
+      shell("sudo cp -rvf * /storage")   
+    if(shell("sudo ls /storage/ | grep .html ")) {
+      dockerBuilderPublisher {
+            dockerFileDirectory("/storage/")            
+            cloud("Kube_slave")
+        tagsString("9057508163/html:v1")
+            pushOnSuccess(true)
+      
+            fromRegistry {
+                  url("9057508163")
+                  credentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+            }
+            pushCredentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+            cleanupWithJenkinsJobDelete(false)
+            noCache(false)
+            pull(true)
+        	cleanImages(true)
+           
+      }
+}else {
+      dockerBuilderPublisher {
+            dockerFileDirectory("/storage/")            
+        cloud("Kube_slave")
+        tagsString("9057508163/php:v1")
+            pushOnSuccess(true)
+      
+            fromRegistry {
+                  url("9057508163")
+                  credentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+            }
+            pushCredentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+            cleanupWithJenkinsJobDelete(false)
+            noCache(false)
+            pull(true)
+        cleanImages(true)
+}
+ }
+}
+}
