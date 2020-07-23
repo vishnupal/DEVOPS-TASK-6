@@ -65,7 +65,7 @@ job("detect_DSL"){
   
   steps{
     
-    shell("if sudo ls /html_test/ | grep html; then sudo curl -u admin:redhat http://192.168.43.151:8080/job/html_dep_DSL/build?token=html_dep; else   if sudo ls /php_test/ | grep php;  then sudo  curl -u admin:redhathttp://192.168.43.151:8080/job/php_dep_DSL/build?token=php_dep;fi;fi;if sudo ls /php_test/ | grep php;then sudo curl -u admin:redhat http://192.168.43.151:8080/job/php_dep/build?token=php_success;fi;")
+    shell("if sudo ls /storage/ | grep html; then sudo curl -u admin:redhat http://192.168.43.151:8080/job/html_dep_DSL/build?token=html_dep; else   if sudo ls /storage/ | grep php;  then sudo  curl -u admin:redhat http://192.168.43.151:8080/job/php_dep_DSL/build?token=php_dep;fi;fi;if sudo ls /storage/ | grep php;then sudo curl -u admin:redhat http://192.168.43.151:8080/job/php_dep/build?token=php_success;fi;")
 }
 }
 
@@ -96,6 +96,6 @@ job("php_dep_DSL")
   }
   
   steps{
-    shell("if sudo kubectl get pvc | grep php;then if sudo kubectl get deploy | grep php; then  sudo  kubectl set image deploy/html-app html-con=90575081630/php:v1;  else sudo kubectlcreate -f /storage/create_html_dep.yml;fi;else sudo kubectl create -f /storage/create_php_deploy.yml;fi;")
+    shell("if sudo kubectl get pvc | grep php;then if sudo kubectl get deploy | grep php; then  sudo  kubectl set image deploy/html-app html-con=90575081630/php:v1;  else sudo kubectl create -f /storage/create_html_dep.yml;fi;else sudo kubectl create -f /storage/create_php_deploy.yml;fi;")
   }
 }
