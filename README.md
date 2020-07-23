@@ -47,9 +47,9 @@ job("github_pull")
       
             fromRegistry {
                   url("9057508163")
-                  credentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+                  credentialsId("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
             }
-            pushCredentialsId("4d43a672-9085-4ce0-964a-666f02662504")
+            pushCredentialsId("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")
                 cleanImages(false)
 
             cleanupWithJenkinsJobDelete(false)
