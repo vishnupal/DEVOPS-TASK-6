@@ -62,7 +62,7 @@ spec:
     spec:
       containers:
       - name: html-con
-        image: 9057508163/html:v1
+        image: 9057508163/don:v1
         volumeMounts:
         - name: html-log
           mountPath: /var/log/httpd/
