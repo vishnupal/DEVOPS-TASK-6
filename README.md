@@ -142,13 +142,92 @@ steps {
 ## task 1:- By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed ) 
 ## so perform this task i create detect_DSL job it is create by our seed job . it detect the our code run the html or php deployment job 
 ![](images/detect.jpg)
-
 ![](images/detect1.jpg)
 
 
 ### This job run after detect_DSL trigger this job  creating the deployment i create a yml file so in this file i create a service and on port number 80 and expose to the 32000 port to punic world . it create a  pvc service for storing data persistent and ceate a deploymet using the docker image that is create by my github_pull job and mount the pvc and service on deployment
 ![](images/html.jpg)
 ![](images/html1.jpg)
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: html-pvc
+  labels:
+    env: test
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: html-log-pvc
+  labels:
+    env: test
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: html-svc
+  labels:
+    name: html-svc
+spec:
+  selector:
+    name: html-pod
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 32000
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: html-app
+  labels:
+    name: html-app
+    env: test
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+    - { key: name, operator: In , values: [ html-pod ] }
+  template:
+    metadata:
+      name: html-pod
+      labels:
+        name: html-pod
+    spec:
+      containers:
+      - name: html-con
+        image: 9057508163/don:v1
+        volumeMounts:
+        - name: html-log
+          mountPath: /var/log/httpd/
+        - name: html-dir
+          mountPath: /var/www/html/
+      volumes:
+      - name: html-log
+        persistentVolumeClaim:
+          claimName: html-log-pvc
+      - name: html-dir
+        persistentVolumeClaim:
+          claimName: html-pvc
+
+```
 ### here i also same for php i create yml file and create a  service of it and pvc 
 ![](images/php.jpg)
 
