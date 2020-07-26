@@ -1,5 +1,5 @@
 # DEVOPS-TASK-6
- 
+ ![](https://miro.medium.com/max/2504/1*o90wf0JFYQz0Y1WyHFOMhQ.png)
 ## In this task i use  DSL is scriptable via Groovy and so it is extremely flexible. The DSL also provides direct control over a job’s XML.
 ### here i use job DSL plugin for automate the task you can use the pipeline for single mangement but job plugin is help to create different jobs and manage that job is very esay rather then pipeline 
 ## job DSL It allowed you to introduce logic and variables into scripting your Jenkins jobs and typically one would use these jobs to form some sort of "pipeline" for a particular project. This plugin received quite a bit of traction as a common way to enable job templating and scripting.
