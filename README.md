@@ -140,13 +140,22 @@ steps {
 ![](images/first_1.jpg)
 ## After complete this task  we detect the code run docker image according to there code
 ## task 1:- By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed ) 
-## so perform this task i create detect_DSL job it is create by our seed job . it detect the our code and create k8s deployment 
+## so perform this task i create detect_DSL job it is create by our seed job . it detect the our code run the html or php deployment job 
 ![](images/detect.jpg)
 
 ![](images/detect1.jpg)
 
-Expose your pod so that testing team could perform the testing on the pod
-  ## Make the data to remain persistent using PVC ( If server collects some data like logs, other user information )
-## Job3 : Test your app if it  is working or not.
-## Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
 
+### This job run after detect_DSL trigger this job  creating the deployment i create a yml file so in this file i create a service and on port number 80 and expose to the 32000 port to punic world . it create a  pvc service for storing data persistent and ceate a deploymet using the docker image that is create by my github_pull job and mount the pvc and service on deployment
+![](images/html.jpg)
+![](images/html1.jpg)
+### here i also same for php i create yml file and create a  service of it and pvc 
+![](images/php.jpg)
+
+# Test your app if it  is working or not.
+# if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
+
+
+### here testing the job i create a test job it check the the status code of our site and in case our site is down py python file run and to email to the developer
+
+![](images/test.jpg)
