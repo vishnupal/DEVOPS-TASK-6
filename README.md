@@ -238,3 +238,4 @@ spec:
 ### here testing the job i create a test job it check the the status code of our site and in case our site is down py python file run and to email to the developer
 
 ![](images/test.jpg)
+![](images/deploy.jpg)
