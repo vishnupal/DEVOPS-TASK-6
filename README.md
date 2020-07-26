@@ -13,13 +13,11 @@
 
 ## Create a job chain of job1, job2, job3 and  job4 using build pipeline plugin in Jenkins 
 ## Job2 ( Seed Job ) : Pull  the Github repo automatically when some developers push repo to Github.
+### first of all i creat a seed_job for that i create a new repo for seed job . so here it pull github repo and create different jobs .
+### ![seed_job_repo_link](https://github.com/vishnupal/seed_job.git)
+### so here it create different jobs like when developer push the code then it copy the code and create a image of that code 
 ![seed_job](images/seed_job2.jpg)
-## Further on jobs should be pipeline using written code  using Groovy language by the developer
-
-  ###  1. By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed ) Expose your pod so that testing team could perform the testing on the pod
-  ## Make the data to remain persistent using PVC ( If server collects some data like logs, other user information )
-## Job3 : Test your app if it  is working or not.
-## Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
+![seed_job](images/seed_job3.jpg)
 ```
 job("github_pull")
 {
@@ -133,3 +131,22 @@ steps {
     shell('export status=$(curl -siw "%{http_code}" -o /dev/null 192.168.43.151:32000); if [ $status -eq 200 ]; then exit 0; else python3 /storage/mail.py; exit 1; fi')  }
 }
 ```
+
+### Here my first job is Github_pull so it create the docker image and push on my docker hub repositry so here i create a Dockerfile in github repo for html or php so we make separate directory for both here i testing perpose i only create one Dockerfile of html both are same no diffrent both in php you need to install php. you also need of Access Tokens it genrate by your dockerhub 
+## go to dockerhub Account setting > security > new Access token 
+![](images/first_2.jpg)
+![](images/first_3.jpg)
+![](images/first.jpg)
+![](images/first_1.jpg)
+## After complete this task  we detect the code run docker image according to there code
+## task 1:- By looking at the code or program file, Jenkins should automatically start the respective language interpreter installed image container to deploy code on top of Kubernetes ( eg. If code is of  PHP, then Jenkins should start the container that has PHP already installed ) 
+## so perform this task i create detect_DSL job it is create by our seed job . it detect the our code and create k8s deployment 
+![](images/detect.jpg)
+
+![](images/detect1.jpg)
+
+Expose your pod so that testing team could perform the testing on the pod
+  ## Make the data to remain persistent using PVC ( If server collects some data like logs, other user information )
+## Job3 : Test your app if it  is working or not.
+## Job4 : if app is not working , then send email to developer with error messages and redeploy the application after code is being edited by the developer
+
